@@ -96,22 +96,5 @@ public class RobotContainer {
 
     new JoystickButton(control, ConstantesIO.gatilloIzquierdo).whileActiveOnce(new MoverGarra(s_garra, ConstantesMotoresGarra.velDentroGarra));
     new JoystickButton(control, ConstantesIO.gatilloDerecho).whileActiveOnce(new MoverGarra(s_garra, ConstantesMotoresGarra.velFueraGarra));
-
-    /*
-    new JoystickButton(c_control, ConstantesIO.botonCruz)
-        .whileActiveOnce(new MoverElevador(s_elevador, ConstantesElevador.velBajada));
-    
-    new JoystickButton(c_control, ConstantesIO.gatilloDerecho)
-        .whileActiveOnce(new ActivarLanzador(s_lanzador, ConstantesLanzador.velLanzador));
-
-    new JoystickButton(c_control, ConstantesIO.bumperDerecho)
-        .whileActiveOnce(new ActivarIntake(s_intake, ConstantesIntake.velRecoger));
-    new JoystickButton(c_control, ConstantesIO.bumperIzquierdo)
-        .whileActiveOnce(new ActivarIntake(s_intake, ConstantesIntake.velExpulsar));
-    new JoystickButton(c_control, ConstantesIO.botonCirculo)
-        .whileActiveOnce(new MoverCuerda(s_cuerda, ConstantesCuerda.velSubirCuerda));
-    new JoystickButton(c_control, ConstantesIO.botonCuadrado)
-        .whileActiveOnce(new MoverCuerda(s_cuerda, ConstantesCuerda.velBajarCuerda));
-    */
   }
 }

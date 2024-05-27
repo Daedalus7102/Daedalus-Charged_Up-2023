@@ -42,9 +42,5 @@ public class MoverChasisAdelante extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
-    // if (s_chasis.promedioEncoder() > avanceEncoder)
-    //   return true;
-    // else
-    //   return false;
   }
 }

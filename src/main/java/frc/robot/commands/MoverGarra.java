@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Garra;
 
 /* Constantes correspondiente al comando */
-import frc.robot.Constants.ConstantesMotoresGarra;
 
 public class MoverGarra extends CommandBase {
 

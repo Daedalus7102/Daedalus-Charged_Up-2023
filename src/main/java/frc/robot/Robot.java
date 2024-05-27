@@ -15,10 +15,7 @@ import frc.robot.subsystems.Elevador;
 import frc.robot.subsystems.Pistones;
 import frc.robot.subsystems.Garra;
 
-import frc.robot.commands.ManejoArcade;
 import frc.robot.commands.OpenGripper;
-import frc.robot.commands.MoverElevador;
-import frc.robot.commands.MoverPistones;
 import frc.robot.commands.MoverGarra;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -26,31 +23,17 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;  
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.Constants.ConstantesChasis;
 import frc.robot.Constants.ConstantesMotoresGarra;
-import frc.robot.Constants.ConstantesIO;
 import frc.robot.Constants.ConstantesGripper;
-import frc.robot.Constants.ConstantesElevador;
 import frc.robot.Constants.ConstantesPistones;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import java.lang.Math;
-
-// LIMELIGHT
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -281,146 +264,7 @@ public class Robot extends TimedRobot {
         }
         break;
     }
-
-    /*
-    else if(atravesarRampa){
-      while(temporizador.get() < tiempoDisparador + tiempoAtravesar){
-        s_chasis.autonomo(1.20 * findRampaSpeed, 1.20 * findRampaSpeed);
-      }
-      while(temporizador.get() < tiempoDisparador + tiempoAtravesar + tiempoRegresar){
-        autonomoAdelante();
-      }
-      
-      Double currentAngleRobot = Double.valueOf( Math.abs(ahrs.getRoll()) );
-      if (encontrarRampa && Math.abs(currentAngleRobot) >= rampaAngle){
-        encontrarRampa = false;
-        needsAutoBalance = true;
-      }
-      if(!encontrarRampa && needsAutoBalance){
-        autonomoBalancearse();
-      }
-    }
-    else{
-      if(encontrarRampa){
-        autonomoReversa();
-      }
-  
-      Double currentAngleRobot = Double.valueOf( Math.abs(ahrs.getRoll()) );
-      if (encontrarRampa && Math.abs(currentAngleRobot) >= rampaAngle){
-        encontrarRampa = false;
-        needsAutoBalance = true;
-      }
-      if(!encontrarRampa && needsAutoBalance){
-        autonomoBalancearse();
-      }
-    }
-    */
-
-    /*
-    SmartDashboard.putNumber( "CURRENT ANGLE", Math.abs(Double.valueOf(ahrs.getYaw())) );
-    if(temporizador.get() < 10){
-      Double currentAngle = Double.valueOf(ahrs.getYaw());
-      Double minAngle = finalAngle - turnThreshold;
-      Double maxAngle = finalAngle + turnThreshold;
-
-      if(currentAngle < maxAngle){
-        Double speedDif = Math.abs(maxAngle - currentAngle)/turnHalfCircle;
-        s_chasis.autonomo(maxTurnSpeed * -speedDif, maxTurnSpeed * speedDif);
-      }
-      else if(currentAngle < 0){
-        Double speedDif = Math.abs(currentAngle - minAngle)/turnHalfCircle;
-        s_chasis.autonomo(maxTurnSpeed * speedDif, maxTurnSpeed * -speedDif);
-      }
-    }
-
-    if(temporizador.get() > 10){
-      s_chasis.autonomo(0, 0);
-    }
-    */
-
     Timer.delay(0.01);
-
-    /*
-    if (false)
-    switch (m_autoSelected) {
-      case kCenterBalance:
-        if(temporizador.get() < 0.3){
-          s_pistones.moverPistones(ConstantesPistones.bajar);
-        }
-        else{
-          s_pistones.detenerPistones(ConstantesPistones.frenar);
-        }
-
-        if(temporizador.get() > 2){
-          while(temporizador.get() < 3){
-            s_garra.moverGarra(0.5);
-          }
-          
-          if(temporizador.get() < 4){
-            s_garra.moverGarra(-1); 
-          }
-          else{
-            s_garra.moverGarra(0);
-          }
-        }
-        while(temporizador.get() > 5 && temporizador.get() < 7.67){
-          s_chasis.autonomo(.275, .275);
-        } 
-        break;
-      case kSideAuto:
-      default:
-        if(temporizador.get() < 0.3){
-          s_pistones.moverPistones(ConstantesPistones.bajar);
-        }
-        else{
-          s_pistones.detenerPistones(ConstantesPistones.frenar);
-        }
-
-        if(temporizador.get() > 2){
-          while(temporizador.get() < 3){
-            s_garra.moverGarra(0.5);
-          }
-          
-          if(temporizador.get() < 4){
-            s_garra.moverGarra(-1); 
-          }
-          else{
-            s_garra.moverGarra(0);
-          }
-        }
-        while(temporizador.get() > 5 && temporizador.get() < 8.2){
-          s_chasis.autonomo(.35, .35);
-        }
-        while(temporizador.get() > 8.2 && temporizador.get() < 9.4){
-          s_chasis.autonomo(.31, -.31);
-        }
-        break;
-      case KCenterOutBalance:
-        if(temporizador.get() < 0.3){
-          s_pistones.moverPistones(ConstantesPistones.bajar);
-        }
-        else{
-          s_pistones.detenerPistones(ConstantesPistones.frenar);
-        }
-
-        if(temporizador.get() > 2){
-          while(temporizador.get() < 3){
-            s_garra.moverGarra(0.5);
-          }
-          
-          if(temporizador.get() < 4){
-            s_garra.moverGarra(-1); 
-          }
-          else{
-            s_garra.moverGarra(0);
-          }
-        }
-        while(temporizador.get() > 5 && temporizador.get() < 7.62){
-          s_chasis.autonomo(.275, .275);
-        }
-        break;      
-    } 
-    */
   }
   /** This function is called periodically during teleoperated init. */
   @Override
